@@ -10,3 +10,10 @@ example satellite:
 AO-07
 1 07530U 74089B   20219.44701373 -.00000036  00000-0  58084-4 0  9995
 2 07530 101.8033 188.9163 0011776 268.5387 207.6898 12.53644475092259
+
+URLs for plaintext TLE:
+amsat:
+    https://www.amsat.org/tle/current/nasabare.txt
+celestrak
+    https://celestrak.com/NORAD/elements/
+    https://celestrak.com/NORAD/elements/amateur.txt
