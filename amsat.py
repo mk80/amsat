@@ -9,20 +9,36 @@ print('Loaded', len(satellites), 'satellites')
 
 ts = load.timescale()
 
-home = Topos('32.4809 N', '117.2250 W')
+# San Diego
+home = Topos('32.48 N', '117.22 W')
 
 print(datetime.today())
 today = datetime.today()
 print(today.year)
 print(today.month)
 print(today.day)
+print(today.hour)
+print(today.minute)
 
-t0 = ts.utc(today.year, today.month, today.day)
-t1 = ts.utc(today.year, today.month, today.day + 1)
+# timeframe to search for passes
+plus_time = 2
+t0 = ts.utc(today.year, today.month, today.day, today.hour)
+t1 = ts.utc(today.year, today.month, today.day + plus_time)
 
+# testing with just ISS
+by_name = {sat.name: sat for sat in satellites}
+satellite = by_name['ISS']
+print(satellite)
+
+t, events = satellite.find_events(home, t0, t1, altitude_degrees=10.0)
+for ti, event in zip(t, events):
+        name = ('rise above 10°', 'culminate', 'set below 10°')[event]
+        print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
+
+# loop for all satellites... there are a lot...
 for sat in satellites:
-    print(sat)
+    #print(sat)
     t, events = sat.find_events(home, t0, t1, altitude_degrees=30.0)
     for ti, event in zip(t, events):
         name = ('rise above 30°', 'culminate', 'set below 30°')[event]
-        print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
+        #print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
