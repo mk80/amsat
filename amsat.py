@@ -25,9 +25,11 @@ plus_time = 2
 t0 = ts.utc(today.year, today.month, today.day, today.hour)
 t1 = ts.utc(today.year, today.month, today.day + plus_time)
 
+
 # testing with just ISS
 by_name = {sat.name: sat for sat in satellites}
-satellite = by_name['ISS']
+#satellite = by_name['ISS']
+satellite = by_name['AO-07']
 print(satellite)
 
 t, events = satellite.find_events(home, t0, t1, altitude_degrees=10.0)
@@ -35,10 +37,13 @@ for ti, event in zip(t, events):
         name = ('rise above 10°', 'culminate', 'set below 10°')[event]
         print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
 
+
+'''
 # loop for all satellites... there are a lot...
 for sat in satellites:
-    #print(sat)
+    print(sat)
     t, events = sat.find_events(home, t0, t1, altitude_degrees=30.0)
     for ti, event in zip(t, events):
         name = ('rise above 30°', 'culminate', 'set below 30°')[event]
-        #print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
+        print(ti.utc_strftime('%Y %b %d %H:%M:%S'), name)
+'''
